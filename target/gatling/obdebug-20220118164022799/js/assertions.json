@@ -1,0 +1,18 @@
+{
+  "simulation": "onboarding.obDebug",
+  "simulationId": "obdebug",
+  "start": 1642524022799,
+  "description": "",
+  "scenarios": ["Common Scenario"],
+  "assertions": [
+{
+  "path": "Global",
+  "target": "max of response time",
+  "condition": "is less than",
+  "expectedValues": [10000.0],
+  "result": true,
+  "message": "Global: max of response time is less than 10000.0",
+  "actualValue": [2069.0]
+}
+  ]
+}

@@ -1,0 +1,73 @@
+{
+    "name": "Global Information",
+    "numberOfRequests": {
+        "total": 134,
+        "ok": 132,
+        "ko": 2
+    },
+    "minResponseTime": {
+        "total": 190,
+        "ok": 190,
+        "ko": 708
+    },
+    "maxResponseTime": {
+        "total": 1956,
+        "ok": 1956,
+        "ko": 769
+    },
+    "meanResponseTime": {
+        "total": 805,
+        "ok": 806,
+        "ko": 739
+    },
+    "standardDeviation": {
+        "total": 471,
+        "ok": 474,
+        "ko": 31
+    },
+    "percentiles1": {
+        "total": 623,
+        "ok": 618,
+        "ko": 739
+    },
+    "percentiles2": {
+        "total": 1102,
+        "ok": 1144,
+        "ko": 754
+    },
+    "percentiles3": {
+        "total": 1701,
+        "ok": 1702,
+        "ko": 766
+    },
+    "percentiles4": {
+        "total": 1883,
+        "ok": 1884,
+        "ko": 768
+    },
+    "group1": {
+    "name": "t < 800 ms",
+    "count": 88,
+    "percentage": 66
+},
+    "group2": {
+    "name": "800 ms < t < 1200 ms",
+    "count": 12,
+    "percentage": 9
+},
+    "group3": {
+    "name": "t > 1200 ms",
+    "count": 32,
+    "percentage": 24
+},
+    "group4": {
+    "name": "failed",
+    "count": 2,
+    "percentage": 1
+},
+    "meanNumberOfRequestsPerSecond": {
+        "total": 5.583333333333333,
+        "ok": 5.5,
+        "ko": 0.08333333333333333
+    }
+}

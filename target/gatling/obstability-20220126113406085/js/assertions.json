@@ -1,0 +1,10 @@
+{
+  "simulation": "onboarding.obStability",
+  "simulationId": "obstability",
+  "start": 1643196846085,
+  "description": "",
+  "scenarios": ["Common Scenario"],
+  "assertions": [
+
+  ]
+}
