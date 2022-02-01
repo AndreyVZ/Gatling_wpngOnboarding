@@ -7,7 +7,7 @@ class obDebug extends Simulation {
 
 
   setUp(
-    BaseScenario().inject(atOnceUsers(9))
+    BaseScenario().inject(atOnceUsers(20))
   ).protocols(
     httpProtocol
   )

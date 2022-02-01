@@ -22,8 +22,6 @@ object Actions {
         println("!!! User is already registered !!!")
         exitHere
       }
-
-
   }
 
   def wpngCstInstitutionSearch = {
@@ -93,7 +91,6 @@ object Actions {
             |}
             |""".stripMargin)).asJson
         .check(status is 200)
-      //.check(jsonPath("$.userLogins[0].id").saveAs("user_login_id"))
     )
   }
 
@@ -102,6 +99,16 @@ object Actions {
       http("WPNG_SSO_User_Login")
         .post("/wpng/api/v1/sso/jwt/login")
         .body(StringBody("userid=${student_name}@wpng.com&password=stresstest"))
+        .header("content-type", "application/x-www-form-urlencoded")
+        .check(status is 200)
+    )
+  }
+
+  def wpngSsoUserLogin2 = {
+    exec(
+      http("WPNG_SSO_User_Login")
+        .post("/wpng/api/v1/sso/jwt/login")
+        .body(StringBody("userid=${sso_login_email}&password=stresstest"))
         .header("content-type", "application/x-www-form-urlencoded")
         .check(status is 200)
     )
@@ -250,6 +257,8 @@ object Actions {
         .check(status is 200)
     )
   }
+
+
 
 
 }

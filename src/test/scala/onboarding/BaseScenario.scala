@@ -1,7 +1,7 @@
 package onboarding
 
 import io.gatling.core.Predef._
-import io.gatling.core.structure.{ChainBuilder, ScenarioBuilder}
+import io.gatling.core.structure._
 import onboarding.Feeders._
 
 
@@ -18,7 +18,8 @@ class BaseScenario {
       .exec(Actions.wpngCstUserCreate).exec(Methods.myPause())
       .exec(Actions.wpngCstUserActivateLogin).exec(Methods.myPause())
       .exec(Actions.wpngCstUserSetPassword).exec(Methods.myPause())
-      .exec(Actions.wpngSsoUserLogin).exec(Methods.myPause())
+      .exec{session => session.set("sso_login_email", session("student_name").as[String] + "@wpng.com")}
+      .exec(Actions.wpngSsoUserLogin2).exec(Methods.myPause())
       .exec(Actions.wpngCstUserSearchByLogin).exec(Methods.myPause())
       .exec(Actions.wpngCstInstitutionDetails).exec(Methods.myPause())
       .exec(Actions.wpngCstUserEnrollments).exec(Methods.myPause())
@@ -34,7 +35,8 @@ class BaseScenario {
       .exec(Actions.wpngCstUserCreate).exec(Methods.myPause())
       .exec(Actions.wpngCstUserActivateLogin).exec(Methods.myPause())
       .exec(Actions.wpngCstUserSetPassword).exec(Methods.myPause())
-      .exec(Actions.wpngSsoUserLogin).exec(Methods.myPause())
+      .exec{session => session.set("sso_login_email", session("student_name").as[String] + "@wpng.com")}
+      .exec(Actions.wpngSsoUserLogin2).exec(Methods.myPause())
       .exec(Actions.wpngCstUserSearchByLogin).exec(Methods.myPause())
       .exec(Actions.wpngCstInstitutionDetails).exec(Methods.myPause())
       .exec(Actions.wpngCstUserEnrollments).exec(Methods.myPause())
@@ -52,7 +54,8 @@ class BaseScenario {
       .exec(Actions.wpngCstUserCreate).exec(Methods.myPause())
       .exec(Actions.wpngCstUserActivateLogin).exec(Methods.myPause())
       .exec(Actions.wpngCstUserSetPassword).exec(Methods.myPause())
-      .exec(Actions.wpngSsoUserLogin).exec(Methods.myPause())
+      .exec{session => session.set("sso_login_email", session("student_name").as[String] + "@wpng.com")}
+      .exec(Actions.wpngSsoUserLogin2).exec(Methods.myPause())
       .exec(Actions.wpngCstUserSearchByLogin).exec(Methods.myPause())
       .exec(Actions.wpngCstInstitutionDetails).exec(Methods.myPause())
       .exec(Actions.wpngCstUserEnrollments).exec(Methods.myPause())
@@ -61,14 +64,27 @@ class BaseScenario {
       .exec(Actions.wpngCstLicenseFreeTrial).exec(Methods.myPause())
   }
 
+  val grOB_StudLogin: ChainBuilder = group("grOB_StudLogin"){
+    exec{session => session.set("sso_login_email", session("stud_login_email").as[String])}
+    .exec(Actions.wpngSsoUserLogin2)
+//      .exec(Actions.wpngCstUserSearchByLogin).exec(Methods.myPause())
+//      .exec(Actions.wpngCstInstitutionDetails).exec(Methods.myPause())
+//      .exec(Actions.wpngCstUserEnrollments).exec(Methods.myPause())
+//      .exec(Actions.wpngCstInstitutionSections).exec(Methods.myPause())
+//      .exec(Actions.wpngCstSectionEnrollStudent).exec(Methods.myPause())
+//      .exec(Actions.wpngCstLicenseFreeTrial).exec(Methods.myPause())
+  }
+
   val scn: ScenarioBuilder = scenario("Common Scenario")
     .feed(obStudentName)
     .feed(obSections)
     .feed(obRegcode)
+    .feed(obStudLogin)
     .randomSwitch(
-      33.33 -> exec(grOB_StudRegPurchase),
-      33.33 -> exec(grOB_StudRegRegcode),
-      33.34 -> exec(grOB_StudRegFreeTrial)
+      25.0 -> exec(grOB_StudRegPurchase),
+      25.0 -> exec(grOB_StudRegRegcode),
+      25.0 -> exec(grOB_StudRegFreeTrial),
+      25.0 -> exec(grOB_StudLogin)
     )
 
 

@@ -12,6 +12,7 @@ object Feeders {
   }
   val obSections: BatchableFeederBuilder[String] = csv("ob_sections.csv").random.eager //from RAM
   val obRegcode: BatchableFeederBuilder[String] = csv("ob_regcode.csv").random.eager //from RAM
+  val obStudLogin: BatchableFeederBuilder[String] = csv("ob_studLogin.csv").random.eager //from RAM
 
 
 }
