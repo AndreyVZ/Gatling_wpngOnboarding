@@ -94,15 +94,15 @@ object Actions {
     )
   }
 
-  def wpngSsoUserLogin = {
-    exec(
-      http("WPNG_SSO_User_Login")
-        .post("/wpng/api/v1/sso/jwt/login")
-        .body(StringBody("userid=${student_name}@wpng.com&password=stresstest"))
-        .header("content-type", "application/x-www-form-urlencoded")
-        .check(status is 200)
-    )
-  }
+//  def wpngSsoUserLogin = {
+//    exec(
+//      http("WPNG_SSO_User_Login")
+//        .post("/wpng/api/v1/sso/jwt/login")
+//        .body(StringBody("userid=${student_name}@wpng.com&password=stresstest"))
+//        .header("content-type", "application/x-www-form-urlencoded")
+//        .check(status is 200)
+//    )
+//  }
 
   def wpngSsoUserLogin2 = {
     exec(
@@ -117,9 +117,10 @@ object Actions {
   def wpngCstUserSearchByLogin = {
     exec(
       http("WPNG_CST_User_Search_by_Login")
-        .get("/wpng/api/v1/users?loginName=${student_name}@wpng.com")
+        .get("/wpng/api/v1/users?loginName=${sso_login_email}")
         .check(status is 200)
         .check(jsonPath("$.profileKey").saveAs("user_profile_key"))
+        .check(jsonPath("$.id").saveAs("user_profile_id"))
     )
   }
 
@@ -258,6 +259,32 @@ object Actions {
     )
   }
 
+  //wpng_onboard_stud_login
+
+  def wpngCstUserTimezone = {
+    exec(
+      http("WPNG_CST_User_Timezone")
+        .get("/wpng/api/v2/users/${user_profile_key}/timeZone")
+        .check(status is 200)
+        .check(jsonPath("$.ianaZoneId").saveAs("iana_zone_id"))
+    )
+  }
+
+  def wpngCstOnboardStudentSections = {
+    exec(
+      http("WPNG_CST_Onboard_Student_Sections")
+        .get("/wpng/api/v1/onboard/students/${user_profile_key}/dashboard/sections?ianaZoneId=${iana_zone_id}")
+        .check(status is 200)
+    )
+  }
+
+  def wpngCstOnboardStudentAssignments = {
+    exec(
+      http("WPNG_CST_Onboard_Student_Assignments")
+        .get("/wpng/api/v1/onboard/students/dashboard/assignments")
+        .check(status in (200,404))
+    )
+  }
 
 
 

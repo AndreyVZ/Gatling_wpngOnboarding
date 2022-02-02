@@ -7,11 +7,11 @@ class obDebug extends Simulation {
 
 
   setUp(
-    BaseScenario().inject(atOnceUsers(20))
+    BaseScenario().inject(atOnceUsers(24))
   ).protocols(
     httpProtocol
   )
-    .maxDuration(60000)
+    .maxDuration(120000)
     .assertions(global.responseTime.max.lt(10000))
 
 }

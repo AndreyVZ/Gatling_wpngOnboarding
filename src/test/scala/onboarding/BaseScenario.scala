@@ -66,13 +66,12 @@ class BaseScenario {
 
   val grOB_StudLogin: ChainBuilder = group("grOB_StudLogin"){
     exec{session => session.set("sso_login_email", session("stud_login_email").as[String])}
-    .exec(Actions.wpngSsoUserLogin2)
-//      .exec(Actions.wpngCstUserSearchByLogin).exec(Methods.myPause())
-//      .exec(Actions.wpngCstInstitutionDetails).exec(Methods.myPause())
-//      .exec(Actions.wpngCstUserEnrollments).exec(Methods.myPause())
-//      .exec(Actions.wpngCstInstitutionSections).exec(Methods.myPause())
-//      .exec(Actions.wpngCstSectionEnrollStudent).exec(Methods.myPause())
-//      .exec(Actions.wpngCstLicenseFreeTrial).exec(Methods.myPause())
+      .exec(Actions.wpngSsoUserLogin2).exec(Methods.myPause())
+      .exec(Actions.wpngCstUserSearchByLogin).exec(Methods.myPause())
+      .exec(Actions.wpngCstInstitutionDetails).exec(Methods.myPause())
+      .exec(Actions.wpngCstUserTimezone).exec(Methods.myPause())
+      .exec(Actions.wpngCstOnboardStudentSections).exec(Methods.myPause())
+      .exec(Actions.wpngCstOnboardStudentAssignments).exec(Methods.myPause())
   }
 
   val scn: ScenarioBuilder = scenario("Common Scenario")

@@ -7,10 +7,10 @@ import scala.language.postfixOps
 
 class obStability extends Simulation {
 
-  val intensity: Int = 2 //TPS
-  val stageDuration: FiniteDuration = 10 minute
+  val intensity: Int = 3 //TPS
+  val stageDuration: FiniteDuration = 5 minute
   val rampDuration: FiniteDuration = 2 minute
-  val testDuration: FiniteDuration = 12 minute
+  val testDuration: FiniteDuration = 7 minute
 
   setUp(
     BaseScenario().inject(
